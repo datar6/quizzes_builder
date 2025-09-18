@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { JsonValue } from "@prisma/client/runtime/library";
 import { Request, Response } from "express";
 import { CreateQuizRequest } from "../types/quiz";
 
@@ -36,9 +37,9 @@ export const getQuizzes = async (req: Request, res: Response) => {
 
 		const quizzesWithCount = quizzes.map(
 			(quiz: {
-				id: number;
+				id: string;
 				title: string;
-				questions: string | any[];
+				questions: JsonValue;
 				createdAt: Date;
 			}) => ({
 				id: quiz.id,
